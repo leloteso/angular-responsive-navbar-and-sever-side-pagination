@@ -1,0 +1,78 @@
+<nav ngxNavbarDynamicExpand class="navbar-light bg-light">
+  <div class="container-fluid">
+    <a class="navbar-brand" href="#">Real Idea</a>
+    <button class="navbar-toggler" type="button" (click)="collapse.toggle()" aria-controls="main-nav"
+      aria-expanded="false" aria-label="Toggle navigation">
+      <span class="navbar-toggler-icon
+                d-flex
+                align-items-center
+                justify-content-center 
+                "></span>
+    </button>
+    <ngx-navbar-collapse id="main-nav" #collapse="ngxNavbarCollapse">
+      <ul class="navbar-nav mr-auto">
+        <li class="nav-item active">
+          <a class="nav-link" href="#home" routerLink="/">Home </a>
+        </li>
+        <li class="nav-item">
+          <a class="nav-link" href="#user" routerLink="/user">User</a>
+        </li>
+        <li class="nav-item">
+          <a class="nav-link" href="#post" routerLink="/post">Post</a>
+        </li>
+        <li class="nav-item">
+          <a class="nav-link" href="#feedback" routerLink="/feedback">FeedBack</a>
+        </li>
+        <li class="nav-item">
+          <a class="nav-link" href="#about" routerLink="/about">About</a>
+        </li>
+      </ul>
+      
+    </ngx-navbar-collapse>
+  </div>
+</nav>
+<div class="container">
+  <router-outlet></router-outlet>
+  <div class="container mt-5">
+    <h2 class="mb-3 text-center">Angular 14 Server Side Pagination Example</h2>
+    <table class="table">
+      <thead>
+        <tr>
+          <th scope="col">ID</th>
+          <th scope="col">First name</th>
+          <th scope="col">Last name</th>
+          <th scope="col">Email</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr
+          *ngFor="
+            let student of Students
+              | paginate
+                : {
+                    itemsPerPage: 6,
+                    currentPage: pagination,
+                    totalItems: allStudents
+                  }
+          "
+        >
+          <td scope="row">{{ student.id }}</td>
+          <td>{{ student.first_name }}</td>
+          <td>{{ student.last_name }}</td>
+          <td>{{ student.email }}</td>
+        </tr>
+      </tbody>
+    </table>
+    <div class="d-flex justify-content-center">
+  
+      <pagination-controls
+      class="my-pagination"
+        previousLabel="Prev"
+        nextLabel="Next"
+        
+        (pageChange)="renderPage($event)"
+      >
+      </pagination-controls>
+    </div>
+  </div>
+</div>
